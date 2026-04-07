@@ -23,6 +23,10 @@ export default function RegisterPage() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.role);
       document.cookie = `token=${data.token}; Max-Age=86400; Path=/; SameSite=Lax`;
+      if (data.role === "WORKER") {
+        router.push("/dashboard/worker/build-profile");
+        return;
+      }
       router.push(`/dashboard/${data.role.toLowerCase()}`);
     } catch (err) {
       if (axios.isAxiosError(err)) {
